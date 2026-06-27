@@ -1,0 +1,677 @@
+/* ========================
+   LOADING ANIMATION
+======================== */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(11, 11, 11, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOutOverlay 0.5s ease-out 1.5s forwards;
+}
+
+@keyframes fadeOutOverlay {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.loader {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid;
+  border-color: #9933ff transparent transparent transparent;
+  border-radius: 50%;
+  animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.loader-ring:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.loader-ring:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.loader-ring:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  position: absolute;
+  color: #9933ff;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 80px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ========================
+   MAIN CONTAINER
+======================== */
+.dota2-container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b0b0b 0%, #1a1a1a 100%);
+  color: #ffffff;
+  padding-bottom: 50px;
+}
+
+/* ========================
+   BANNER SECTION
+======================== */
+.dota2-banner {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: zoomInBanner 1s ease-out;
+}
+
+@keyframes zoomInBanner {
+  from {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.banner-title {
+  display: none;
+}
+
+.banner-subtitle {
+  display: none;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ========================
+   SECTION HEADER
+======================== */
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.section-title {
+  font-size: 48px;
+  font-weight: 900;
+  color: #00ff88;
+  margin: 0 0 15px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.section-desc {
+  font-size: 16px;
+  color: #999;
+  margin: 0;
+  font-weight: 300;
+}
+
+/* ========================
+   PLAYERS SECTION
+======================== */
+.players-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.player-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border: 1px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(153, 51, 255, 0.1);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.player-card:hover {
+  transform: scale(1.08) translateY(-10px);
+  border-color: #9933ff;
+  box-shadow: 0 15px 40px rgba(153, 51, 255, 0.3);
+  background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+}
+
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.player-card:hover .card-image-wrapper img {
+  transform: scale(1.15);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(153, 51, 255, 0.4);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 15px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.player-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.role-badge {
+  background: linear-gradient(135deg, #9933ff, #ff00ff);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.player-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+  color: #00ff88;
+}
+
+.player-team {
+  font-size: 13px;
+  color: #999;
+  margin: 0 0 15px 0;
+}
+
+.player-stats {
+  display: flex;
+  gap: 10px;
+}
+
+.stat-item {
+  flex: 1;
+  background: rgba(153, 51, 255, 0.1);
+  border: 1px solid #9933ff;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.player-card:hover .stat-item {
+  background: rgba(153, 51, 255, 0.2);
+}
+
+.stat-label {
+  display: block;
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #9933ff;
+}
+
+/* ========================
+   HEROES SECTION
+======================== */
+.heroes-section {
+  max-width: 1200px;
+  margin: 100px auto;
+  padding: 0 20px;
+}
+
+.heroes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border: 1px solid #333;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 255, 136, 0.1);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.hero-card:hover {
+  transform: scale(1.12) translateY(-15px);
+  border-color: #00ff88;
+  box-shadow: 0 15px 40px rgba(0, 255, 136, 0.3);
+}
+
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), transparent);
+}
+
+.hero-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-card:hover .hero-image-wrapper img {
+  transform: scale(1.18) rotate(3deg);
+}
+
+.hero-type-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: linear-gradient(135deg, #00ff88, #00cc6f);
+  color: #000;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.hero-content {
+  padding: 18px;
+}
+
+.hero-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color: #00ff88;
+}
+
+.hero-description {
+  font-size: 13px;
+  color: #999;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ========================
+   NEWS SECTION
+======================== */
+.news-section {
+  max-width: 1200px;
+  margin: 100px auto;
+  padding: 0 20px;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  animation: slideFromLeft 1s ease-out;
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.news-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border: 1px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(255, 105, 180, 0.1);
+  animation: slideInFromLeft 0.8s ease-out backwards;
+}
+
+.news-card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.news-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.news-card:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.news-card:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-150px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.news-card:hover {
+  transform: scale(1.08) translateY(-10px) translateX(10px);
+  border-color: #ff69b4;
+  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+}
+
+.news-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255, 105, 180, 0.2), transparent);
+}
+
+.news-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.news-card:hover .news-image-wrapper img {
+  transform: scale(1.15) rotate(-2deg);
+}
+
+.news-date-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 105, 180, 0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  animation: slideIn 0.4s ease;
+}
+
+.news-content {
+  padding: 20px;
+}
+
+.news-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  color: #ff69b4;
+  line-height: 1.4;
+}
+
+.news-description {
+  font-size: 13px;
+  color: #999;
+  margin: 0 0 15px 0;
+  line-height: 1.6;
+}
+
+.read-more-btn {
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.read-more-btn:hover {
+  transform: translateX(5px);
+  box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
+}
+
+/* ========================
+   RESPONSIVE DESIGN
+======================== */
+@media (max-width: 768px) {
+  .banner-title {
+    font-size: 48px;
+  }
+
+  .banner-subtitle {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+  .players-grid,
+  .heroes-grid,
+  .news-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .player-card:hover,
+  .hero-card:hover,
+  .news-card:hover {
+    transform: scale(1.05) translateY(-8px);
+  }
+
+  .card-image-wrapper {
+    height: 220px;
+  }
+
+  .hero-image-wrapper {
+    height: 200px;
+  }
+
+  .news-image-wrapper {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dota2-banner {
+    height: 300px;
+  }
+
+  .banner-title {
+    font-size: 36px;
+  }
+
+  .banner-subtitle {
+    font-size: 14px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .section-desc {
+    font-size: 14px;
+  }
+
+  .players-grid,
+  .heroes-grid,
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .player-card:hover,
+  .hero-card:hover,
+  .news-card:hover {
+    transform: scale(1.02);
+  }
+
+  .players-section,
+  .heroes-section,
+  .news-section {
+    margin: 50px auto;
+  }
+}
+
+/* ========================
+   DARK MODE COMPATIBILITY
+======================== */
+@media (prefers-color-scheme: dark) {
+  .dota2-container {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  }
+
+  .player-card,
+  .hero-card,
+  .news-card {
+    border-color: #444;
+  }
+}
