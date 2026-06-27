@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model detail_pesanan {
+  id_detail    Int      @id @default(autoincrement())
+  id_pesanan   Int?
+  id_produk    Int?
+  jumlah       Int?
+  harga_satuan Int?
+  subtotal     Int?
+  pesanan      pesanan? @relation(fields: [id_pesanan], references: [id_pesanan], onDelete: NoAction, onUpdate: NoAction)
+  produk       produk?  @relation(fields: [id_produk], references: [id_produk], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model kategori {
+  id_kategori   Int      @id @default(autoincrement())
+  nama_kategori String?  @db.VarChar(50)
+  deskripsi     String?
+  produk        produk[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model keranjang {
+  id_keranjang Int     @id @default(autoincrement())
+  id_user      Int?
+  id_produk    Int?
+  jumlah       Int?
+  produk       produk? @relation(fields: [id_produk], references: [id_produk], onDelete: NoAction, onUpdate: NoAction)
+  user         user?   @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model pembayaran {
+  id_pembayaran Int       @id @default(autoincrement())
+  id_pesanan    Int?
+  metode_bayar  String?   @db.VarChar(50)
+  status_bayar  String?   @db.VarChar(20)
+  tanggal_bayar DateTime? @db.Timestamp(6)
+  bukti_bayar   String?   @db.VarChar(255)
+  pesanan       pesanan?  @relation(fields: [id_pesanan], references: [id_pesanan], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model pesanan {
+  id_pesanan      Int              @id @default(autoincrement())
+  id_user         Int?
+  tanggal_pesanan DateTime?        @db.Timestamp(6)
+  status_pesanan  String?          @db.VarChar(20)
+  detail_pesanan  detail_pesanan[]
+  pembayaran      pembayaran[]
+  user            user?            @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model produk {
+  id_produk      Int              @id @default(autoincrement())
+  id_kategori    Int?
+  nama_produk    String?          @db.VarChar(100)
+  deskripsi      String?
+  harga          Int?
+  stok           Int?
+  gambar         String?          @db.VarChar(255)
+  detail_pesanan detail_pesanan[]
+  keranjang      keranjang[]
+  kategori       kategori?        @relation(fields: [id_kategori], references: [id_kategori], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model user {
+  id_user   Int         @id @default(autoincrement())
+  nama      String?     @db.VarChar(100)
+  email     String?     @db.VarChar(100)
+  password  String?     @db.VarChar(255)
+  keranjang keranjang[]
+  pesanan   pesanan[]
+}
