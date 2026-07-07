@@ -56,7 +56,7 @@ function History() {
                 border: '1px solid rgba(255,255,255,0.2)',
                 transition: 'all 0.3s' 
               }}
-              onMouseOver={(e) => e.currentTarget.style.borderColor = '#ff4655'}
+              onMouseOver={(e) => e.currentTarget.style.borderColor = '#008000ff'}
               onMouseOut={(e) => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'}
               title="Kembali ke Store"
             >
