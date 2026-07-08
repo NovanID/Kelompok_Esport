@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
-import dota2Banner from "../../assets/dota2banner.png";
+import dota2Banner from "../../assets/Dotabanner.png";
 import hero from "../../assets/hero.png";
 import mirzaImg from "../../assets/mirza.jpeg";
 import satriaImg from "../../assets/satria.jpeg";
 import ridhoImg from "../../assets/ridho.jpeg";
 import hafizhImg from "../../assets/hafizh.jpeg";
 import daniImg from "../../assets/dani.jpeg";
+import antimageImg from "../../assets/antimage.jpg";
+import invokerImg from "../../assets/invoker.jpg";
+import earthshakerImg from "../../assets/earthshaker.jpg";
+import voidSpiritImg from "../../assets/void_spirit.jpg";
+import lionImg from "../../assets/lion.jpg";
+import emberSpiritImg from "../../assets/ember_spirit.jpg";
 import "./dota2.css";
 
 export default function Dota2() {
@@ -101,42 +107,42 @@ export default function Dota2() {
           id: 1,
           name: "Anti-Mage",
           type: "Carry",
-          image: hero,
+          image: antimageImg,
           description: "Hero favorit Mirza dengan damage output tertinggi",
         },
         {
           id: 2,
           name: "Invoker",
           type: "Mid Lane",
-          image: hero,
+          image: invokerImg,
           description: "Hero pilihan Satria untuk kontrol tempo mid game",
         },
         {
           id: 3,
           name: "Earthshaker",
           type: "Support",
-          image: hero,
+          image: earthshakerImg,
           description: "Hero favorit Ridho dan Dani untuk initiate team fight",
         },
         {
           id: 4,
           name: "Void Spirit",
           type: "Offlane",
-          image: hero,
+          image: voidSpiritImg,
           description: "Hero pilihan Hafizh untuk flexibility dan gank",
         },
         {
           id: 5,
           name: "Lion",
           type: "Support",
-          image: hero,
+          image: lionImg,
           description: "Hero disable counter pick untuk Hiling Strike",
         },
         {
           id: 6,
           name: "Ember Spirit",
           type: "Mid Lane",
-          image: hero,
+          image: emberSpiritImg,
           description: "Hero escape dengan burst damage dari Satria",
         },
       ]);

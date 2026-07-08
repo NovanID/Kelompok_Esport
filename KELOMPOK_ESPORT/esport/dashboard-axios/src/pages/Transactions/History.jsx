@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Package, ArrowLeft } from 'lucide-react';
+import { Package, ArrowLeft, Trash2 } from 'lucide-react';
 
 function History() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +32,29 @@ function History() {
 
     fetchHistory();
   }, [navigate]);
+
+  const deleteHistory = async (pesananId) => {
+    if (!window.confirm('Apakah Anda yakin ingin menghapus pesanan ini? Tindakan ini tidak dapat dibatalkan.')) {
+      return;
+    }
+
+    try {
+      setDeleting(pesananId);
+      const token = localStorage.getItem('token');
+      await axios.delete(`http://localhost:5000/api/transactions/history/${pesananId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      // Hapus dari state
+      setHistory(history.filter(order => order.id_pesanan !== pesananId));
+      alert('Pesanan berhasil dihapus');
+    } catch (error) {
+      console.error('Gagal menghapus pesanan:', error);
+      alert('Gagal menghapus pesanan: ' + (error.response?.data?.error || error.message));
+    } finally {
+      setDeleting(null);
+    }
+  };
 
   return (
     <section className="pb-5 text-white position-relative" style={{ backgroundColor: '#050505', minHeight: '100vh', paddingTop: '5rem' }}>
@@ -73,13 +97,24 @@ function History() {
                       <span className="text-secondary small fw-bold d-block">ORDER ID: #{order.id_pesanan}</span>
                       <span className="small">{new Date(order.tanggal_pesanan).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
                     </div>
-                    <div className="text-end">
-                      {paymentMethod && paymentMethod !== 'Unknown' && (
-                        <span className="d-block text-secondary small mb-2 fw-bold">{paymentMethod.toUpperCase()}</span>
-                      )}
-                      <span className={`badge rounded-0 px-3 py-2 ${paymentStatus === 'PAID' ? 'bg-success' : 'bg-danger'}`}>
-                        {paymentStatus}
-                      </span>
+                    <div className="text-end d-flex align-items-center gap-3 justify-content-end">
+                      <button 
+                        className="btn btn-sm btn-outline-danger rounded-0"
+                        onClick={() => deleteHistory(order.id_pesanan)}
+                        disabled={deleting === order.id_pesanan}
+                        title="Hapus pesanan"
+                      >
+                        <Trash2 size={16} className="me-1" />
+                        {deleting === order.id_pesanan ? 'Menghapus...' : 'Hapus'}
+                      </button>
+                      <div>
+                        {paymentMethod && paymentMethod !== 'Unknown' && (
+                          <span className="d-block text-secondary small mb-2 fw-bold">{paymentMethod.toUpperCase()}</span>
+                        )}
+                        <span className={`badge rounded-0 px-3 py-2 ${paymentStatus === 'PAID' ? 'bg-success' : 'bg-danger'}`}>
+                          {paymentStatus}
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div className="card-body p-4">
