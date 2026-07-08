@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import { ArrowLeft, CheckCircle2, XCircle, Clock } from 'lucide-react';
 
 function History() {
   const [history, setHistory] = useState([]);
@@ -34,15 +35,6 @@ function History() {
   useEffect(() => {
     fetchHistory();
   }, [navigate]);
-
-
-      return;
-    }
-
-    try {
-
-    }
-  };
 
   return (
     <section className="pb-5 text-white position-relative" style={{ backgroundColor: '#050505', minHeight: '100vh', paddingTop: '5.5rem' }}>
@@ -93,10 +85,6 @@ function History() {
                     <div>
                       <span className="text-danger small fw-black d-block tracking-wider">ORDER ID: #{order.id_pesanan}</span>
                       <span className="text-secondary small">{new Date(order.tanggal_pesanan).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
-                    </div>
-
-                        </span>
-                      </div>
                     </div>
                   </div>
 
