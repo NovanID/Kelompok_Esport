@@ -3,9 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model detail_pesanan {
@@ -22,7 +21,7 @@ model detail_pesanan {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model kategori {
   id_kategori   Int      @id @default(autoincrement())
-  nama_kategori String?  @db.VarChar(50)
+  nama_kategori String?
   deskripsi     String?
   produk        produk[]
 }
@@ -41,10 +40,10 @@ model keranjang {
 model pembayaran {
   id_pembayaran Int       @id @default(autoincrement())
   id_pesanan    Int?
-  metode_bayar  String?   @db.VarChar(50)
-  status_bayar  String?   @db.VarChar(20)
-  tanggal_bayar DateTime? @db.Timestamp(6)
-  bukti_bayar   String?   @db.VarChar(255)
+  metode_bayar  String?
+  status_bayar  String?
+  tanggal_bayar DateTime?
+  bukti_bayar   String?
   pesanan       pesanan?  @relation(fields: [id_pesanan], references: [id_pesanan], onDelete: NoAction, onUpdate: NoAction)
 }
 
@@ -52,8 +51,8 @@ model pembayaran {
 model pesanan {
   id_pesanan      Int              @id @default(autoincrement())
   id_user         Int?
-  tanggal_pesanan DateTime?        @db.Timestamp(6)
-  status_pesanan  String?          @db.VarChar(20)
+  tanggal_pesanan DateTime?
+  status_pesanan  String?
   detail_pesanan  detail_pesanan[]
   pembayaran      pembayaran[]
   user            user?            @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
@@ -63,11 +62,11 @@ model pesanan {
 model produk {
   id_produk      Int              @id @default(autoincrement())
   id_kategori    Int?
-  nama_produk    String?          @db.VarChar(100)
+  nama_produk    String?
   deskripsi      String?
   harga          Int?
   stok           Int?
-  gambar         String?          @db.VarChar(255)
+  gambar         String?
   detail_pesanan detail_pesanan[]
   keranjang      keranjang[]
   kategori       kategori?        @relation(fields: [id_kategori], references: [id_kategori], onDelete: NoAction, onUpdate: NoAction)
@@ -76,9 +75,9 @@ model produk {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model user {
   id_user   Int         @id @default(autoincrement())
-  nama      String?     @db.VarChar(100)
-  email     String?     @db.VarChar(100)
-  password  String?     @db.VarChar(255)
+  nama      String?
+  email     String?
+  password  String?
   keranjang keranjang[]
   pesanan   pesanan[]
 }
