@@ -38,6 +38,9 @@ function Store() {
       .catch(error => console.error('Gagal mengambil produk:', error));
   }, []);
 
+  /*1. FUNGSI MENGAMBIL ISI KERANJANG (fetchCart)
+   * Mengambil data keranjang belanja milik user dari database backend menggunakan token JWT.
+   */
   const fetchCart = async (token) => {
     try {
       const response = await axios.get('http://localhost:5000/api/cart', {
@@ -63,6 +66,9 @@ function Store() {
     return matchCategory && matchSearch;
   });
 
+  /*2. FUNGSI MENAMBAH BARANG KE KERANJANG (addToCart)
+   * Menambahkan satu item produk ke keranjang belanja user di database melalui API backend.
+   */
   const addToCart = async (product) => {
     if (!isLoggedIn) {
       alert('Harap login terlebih dahulu untuk berbelanja');
@@ -84,6 +90,9 @@ function Store() {
     }
   };
 
+  /*3. FUNGSI UPDATE JUMLAH ITEM (updateQuantity)
+   * Mengubah jumlah kuantitas produk di dalam keranjang belanja.
+   */
   const updateQuantity = async (productId, delta) => {
     const token = localStorage.getItem('token');
     try {
@@ -98,6 +107,9 @@ function Store() {
     }
   };
 
+  /*4. FUNGSI MENGHAPUS ITEM DARI KERANJANG (removeFromCart)
+   * Menghapus produk sepenuhnya dari keranjang belanja user.
+   */
   const removeFromCart = async (productId) => {
     const token = localStorage.getItem('token');
     try {
@@ -120,7 +132,9 @@ function Store() {
     setIsMidtransOpen(true);
   };
 
-  // Fungsi yang dijalankan SETELAH sukses bayar di pop-up Midtrans
+  /*5. FUNGSI PROSES CHECKOUT & PEMBAYARAN (processCheckout)
+   * Mengirim payload item belanja beserta metode pembayaran sukses simulasi Midtrans ke backend API.
+   */
   const processCheckout = async (paymentMethod) => {
     const token = localStorage.getItem('token');
     try {

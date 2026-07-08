@@ -12,6 +12,14 @@ import playerUppiImg from "../../assets/Uppi.png";
 import playerBrianImg from "../../assets/Brian.png";
 import playerDit2Img from "../../assets/dit2.png";
 
+/**
+ * ==========================================
+ * HALAMAN UTAMA DIVISI FREE FIRE (FF)
+ * ==========================================
+ * Fungsi utama untuk menampilkan profil tim Free Fire Hilling Strike,
+ * termasuk ringkasan statistik, daftar roster utama & cadangan,
+ * papan peringkat klasemen, profil staf pelatih, dan jadwal pertandingan.
+ */
 export default function Ff() {
   const division = divisions.freefire;
   const accentColor = division.accent;
@@ -54,7 +62,11 @@ export default function Ff() {
         <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-black to-transparent" />
       </div>
 
-      {/* Hero Section */}
+      {/* ==========================================
+          1. HERO SECTION & STATISTIK RINGKASAN
+          Menampilkan banner atas, tombol kembali,
+          dan metrik performa utama (Win Rate, Event, Peringkat).
+         ========================================== */}
       <div className="relative" style={{ backgroundImage: 'url(https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/526ab8efaf60be59ccf03e314e019a3a.jpg)', backgroundSize: 'cover', backgroundPosition: 'center 20%', minHeight: '100vh' }}>
         <div className="absolute inset-0 bg-black/70"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
@@ -111,7 +123,11 @@ export default function Ff() {
           {/* Left Column - Roster & Schedule (Span 8) */}
           <div className="lg:col-span-8 space-y-8">
 
-            {/* Roster Section */}
+            {/* ==========================================
+                2. ROSTER UTAMA (MAIN ROSTER)
+                Menampilkan daftar pemain inti beserta role,
+                jumlah kills, dan rating individual performa mereka.
+               ========================================== */}
             <div className="p-8 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl">
               <div className="flex justify-between items-end mb-8">
                 <div>
@@ -147,7 +163,11 @@ export default function Ff() {
               </div>
             </div>
 
-            {/* Sub Roster */}
+            {/* ==========================================
+                3. PEMAIN CADANGAN & AKADEMI (SUB ROSTER)
+                Menampilkan daftar pemain pengganti dan pemain
+                akademi beserta role masing-masing.
+               ========================================== */}
             <div className="p-8 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl">
               <h3 className="text-xl font-bold uppercase tracking-wider mb-6 text-gray-300">Substitutes / Academy</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -164,7 +184,11 @@ export default function Ff() {
               </div>
             </div>
 
-            {/* Rankings */}
+            {/* ==========================================
+                 4. PAPAN PERINGKAT KLASEMEN (RANKINGS)
+                 Menampilkan tabel klasemen turnamen yang berisi
+                 rank, nama tim rival, total poin, dan rekor menang-kalah.
+                ========================================== */}
             <div className="p-8 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl overflow-hidden relative">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
               <h2 className="text-3xl font-bold uppercase tracking-wider mb-6 relative z-10" style={{ color: accentColor }}>
@@ -209,7 +233,11 @@ export default function Ff() {
           {/* Right Column - Team Info, Coach, Schedule (Span 4) */}
           <div className="lg:col-span-4 space-y-8">
 
-            {/* Team Info Card */}
+            {/* ==========================================
+                5. KARTU INFORMASI TIM (TEAM PROFILE)
+                Menampilkan detail profil tim Hilling Strike,
+                seperti tahun didirikan, total kemenangan, dan kekalahan match.
+               ========================================== */}
             <div className="p-8 rounded-[2rem] bg-gradient-to-br from-white/10 to-white/5 border border-white/20 backdrop-blur-md shadow-2xl relative overflow-hidden group">
               <div className="absolute -right-6 -top-6 text-8xl opacity-10 font-black italic transform group-hover:scale-110 transition-transform duration-500" style={{ color: accentColor }}>
                 #1
@@ -232,7 +260,11 @@ export default function Ff() {
               </div>
             </div>
 
-            {/* Coach Section */}
+            {/* ==========================================
+                6. STAFF & PELATIH (COACH SECTION)
+                Menampilkan profil pelatih kepala dan asisten pelatih,
+                termasuk nama, jabatan, dan spesialisasi mereka.
+               ========================================== */}
             <div className="p-8 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl">
               <h2 className="text-2xl font-bold uppercase tracking-wider mb-6" style={{ color: accentColor }}>Staff & Pelatih</h2>
               <div className="space-y-6">
@@ -256,7 +288,11 @@ export default function Ff() {
               </div>
             </div>
 
-            {/* Schedule Section */}
+            {/* ==========================================
+                7. JADWAL PERTANDINGAN (SCHEDULE MATCH)
+                Menampilkan jadwal laga tanding mendatang lengkap dengan
+                tanggal, waktu, turnamen, dan tim lawan (format VS).
+               ========================================== */}
             <div className="p-8 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl">
               <h2 className="text-2xl font-bold uppercase tracking-wider mb-6" style={{ color: accentColor }}>Jadwal Match</h2>
               <div className="space-y-4">

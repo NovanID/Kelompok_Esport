@@ -8,6 +8,9 @@ function History() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  /*1. FUNGSI MENGAMBIL RIWAYAT TRANSAKSI (fetchHistory)
+   * Menghubungi backend API untuk mengambil seluruh data transaksi user dan menyimpannya ke state history.
+   */
   const fetchHistory = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -32,6 +35,9 @@ function History() {
     fetchHistory();
   }, [navigate]);
 
+  /*2. FUNGSI PEMBATALAN PESANAN (handleCancelOrder)
+   * Menanyakan konfirmasi pembatalan kepada user, lalu menghubungi backend API untuk membatalkan pesanan.
+   */
   const handleCancelOrder = async (idPesanan) => {
     const token = localStorage.getItem('token');
     if (!token) return;
