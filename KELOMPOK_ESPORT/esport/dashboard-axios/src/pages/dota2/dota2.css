@@ -217,38 +217,41 @@
 
 .player-card {
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  border: 1px solid #333;
-  border-radius: 12px;
+  border: 2px solid rgba(153, 51, 255, 0.3);
+  border-radius: 16px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  box-shadow: 0 8px 32px rgba(153, 51, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(153, 51, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   animation: fadeInUp 0.6s ease-out;
 }
 
 .player-card:hover {
-  transform: scale(1.08) translateY(-10px);
+  transform: scale(1.09) translateY(-12px);
   border-color: #9933ff;
-  box-shadow: 0 15px 40px rgba(153, 51, 255, 0.3);
-  background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+  box-shadow: 0 20px 50px rgba(153, 51, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: linear-gradient(135deg, #2a1a3a 0%, #3a2a4a 100%);
 }
 
 .card-image-wrapper {
   position: relative;
   width: 100%;
-  height: 280px;
+  height: 320px;
   overflow: hidden;
+  background: linear-gradient(135deg, rgba(153, 51, 255, 0.1), rgba(153, 51, 255, 0.05));
 }
 
 .card-image-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  object-position: center top;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
 }
 
 .player-card:hover .card-image-wrapper img {
-  transform: scale(1.15);
+  transform: scale(1.12) rotate(1deg);
+  filter: brightness(1.1);
 }
 
 .card-overlay {
