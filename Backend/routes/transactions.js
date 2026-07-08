@@ -5,7 +5,9 @@ const { verifyToken } = require('../middleware/auth');
 
 const prisma = new PrismaClient();
 
-// GET /api/transactions/history : Mengambil riwayat pesanan user yang sedang login
+/*1. ENDPOINT RIWAYAT PESANAN (GET /api/transactions/history)
+ * Mengambil seluruh data riwayat pesanan milik user yang sedang login beserta detail produk dan status pembayaran.
+ */
 router.get('/history', verifyToken, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -29,7 +31,9 @@ router.get('/history', verifyToken, async (req, res) => {
   }
 });
 
-// POST /api/transactions/cancel/:idPesanan : Membatalkan pesanan dan mengembalikan stok
+/*2. ENDPOINT PEMBATALAN PESANAN (POST /api/transactions/cancel/:idPesanan)
+ * Membatalkan pesanan tertentu, merubah status pembayaran menjadi CANCELLED, dan mengembalikan kuantitas produk ke stok utama.
+ */
 router.post('/cancel/:idPesanan', verifyToken, async (req, res) => {
   try {
     const userId = req.user.id;

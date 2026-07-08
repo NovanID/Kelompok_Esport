@@ -8,6 +8,9 @@ function History() {
   const [deleting, setDeleting] = useState(null);
   const navigate = useNavigate();
 
+  /*1. FUNGSI MENGAMBIL RIWAYAT TRANSAKSI (fetchHistory)
+   * Menghubungi backend API untuk mengambil seluruh data transaksi user dan menyimpannya ke state history.
+   */
   const fetchHistory = async () => {
     const token = localStorage.getItem('token');
     if (!token) {

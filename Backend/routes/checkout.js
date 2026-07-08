@@ -5,8 +5,10 @@ const { verifyToken } = require('../middleware/auth');
 
 const prisma = new PrismaClient();
 
-// Endpoint Checkout: POST /api/checkout
-// Endpoint ini dilindungi oleh verifyToken, jadi hanya user login yang bisa checkout
+/*1. ENDPOINT CHECKOUT PESANAN (POST /api/checkout)
+ * Memvalidasi token JWT user, memeriksa stok barang, melakukan transaksi database
+ * untuk membuat pesanan, detail pesanan, data pembayaran PAID, dan menghapus isi keranjang.
+ */
 router.post('/', verifyToken, async (req, res) => {
   try {
     // cartItems didapat dari keranjang belanja frontend, paymentMethod dari modal Midtrans

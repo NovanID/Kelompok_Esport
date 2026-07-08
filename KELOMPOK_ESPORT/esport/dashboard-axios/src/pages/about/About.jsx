@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import logoEsport from "../../assets/logo_esport1.png";
 
+/**
+ * ==========================================
+ * HALAMAN TENTANG KAMI (ABOUT)
+ * ==========================================
+ * Fungsi utama untuk menampilkan profil organisasi Hilling Strike,
+ * pencapaian statistik tim secara umum (divisi, pro player, juara, fans),
+ * serta deskripsi detail mengenai Visi dan Misi dari organisasi.
+ */
 export default function About() {
   return (
     <section className="min-h-screen bg-slate-950 text-white relative overflow-hidden font-sans">
@@ -8,7 +16,11 @@ export default function About() {
       <div className="absolute top-0 right-0 w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] bg-yellow-600/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-blue-600/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
 
-      {/* Hero Section */}
+      {/* ==========================================
+          1. HERO SECTION & INTRODUKSI UTAMA
+          Menampilkan tajuk selamat datang, deskripsi profil Hilling Strike,
+          dan logo tim dengan animasi denyut (pulse).
+         ========================================== */}
       <div className="container mx-auto px-6 pt-32 pb-20 max-w-7xl relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 space-y-8 text-center lg:text-left">
@@ -45,7 +57,11 @@ export default function About() {
         </div>
       </div>
 
-      {/* Stats Section */}
+      {/* ==========================================
+          2. STATISTIK PENCAPAIAN ORGANISASI
+          Menampilkan metrik pencapaian organisasi seperti total divisi game,
+          jumlah pro player, total piala juara, dan jumlah estimasi fans.
+         ========================================== */}
       <div className="relative z-10 bg-black/40 border-y border-white/5 backdrop-blur-md py-12 mb-24">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -69,7 +85,11 @@ export default function About() {
         </div>
       </div>
 
-      {/* Vision and Mission */}
+      {/* ==========================================
+          3. VISI & MISI ORGANISASI (FILOSOFI KAMI)
+          Menyajikan filosofi arah masa depan tim (Visi) dan langkah-langkah
+          konkret pembinaan talenta & prestasi yang dijalankan (Misi).
+         ========================================== */}
       <div id="vision" className="container mx-auto px-6 py-12 max-w-7xl relative z-10 mb-24">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black uppercase mb-4">Filosofi <span className="text-yellow-500">Kami</span></h2>
