@@ -48,16 +48,43 @@ router.post('/', verifyToken, async (req, res) => {
     const userId = req.user.id;
     const { productId, quantity } = req.body;
 
+    // Ambil info produk untuk cek stok
+    const product = await prisma.produk.findUnique({
+      where: { id_produk: productId }
+    });
+
+    if (!product) {
+      return res.status(404).json({ error: 'Produk tidak ditemukan' });
+    }
+
     // Cek apakah barang sudah ada di keranjang user
     const existingItem = await prisma.keranjang.findFirst({
       where: { id_user: userId, id_produk: productId }
     });
 
+    const currentQty = existingItem ? existingItem.jumlah : 0;
+    const newQty = currentQty + quantity;
+
+    // Jika qty baru <= 0, hapus item dari keranjang
+    if (newQty <= 0) {
+      if (existingItem) {
+        await prisma.keranjang.delete({
+          where: { id_keranjang: existingItem.id_keranjang }
+        });
+      }
+      return res.json({ message: 'Barang dihapus dari keranjang' });
+    }
+
+    // Cek apakah jumlah baru melebihi stok yang tersedia
+    if (product.stok !== null && newQty > product.stok) {
+      return res.status(400).json({ error: `Jumlah tidak boleh melebihi stok produk. Tersedia: ${product.stok}` });
+    }
+
     if (existingItem) {
       // Jika sudah ada, update jumlahnya
       const updated = await prisma.keranjang.update({
         where: { id_keranjang: existingItem.id_keranjang },
-        data: { jumlah: existingItem.jumlah + quantity }
+        data: { jumlah: newQty }
       });
       return res.json({ message: 'Keranjang diupdate', data: updated });
     } else {
@@ -66,7 +93,7 @@ router.post('/', verifyToken, async (req, res) => {
         data: {
           id_user: userId,
           id_produk: productId,
-          jumlah: quantity
+          jumlah: newQty
         }
       });
       return res.status(201).json({ message: 'Barang ditambahkan ke keranjang', data: newItem });
