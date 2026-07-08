@@ -80,7 +80,7 @@ function Store() {
       setIsCartOpen(true);
     } catch (error) {
       console.error('Gagal tambah ke keranjang:', error);
-      alert('Gagal menambahkan barang');
+      alert(error.response?.data?.error || 'Gagal menambahkan barang');
     }
   };
 
@@ -94,6 +94,7 @@ function Store() {
       fetchCart(token);
     } catch (error) {
       console.error('Gagal update keranjang:', error);
+      alert(error.response?.data?.error || 'Gagal mengubah jumlah barang');
     }
   };
 
@@ -135,7 +136,7 @@ function Store() {
       navigate('/history'); 
     } catch (error) {
       console.error('Error checkout:', error);
-      alert('Gagal memproses pembayaran');
+      alert(error.response?.data?.error || 'Gagal memproses pembayaran');
     }
   };
 
