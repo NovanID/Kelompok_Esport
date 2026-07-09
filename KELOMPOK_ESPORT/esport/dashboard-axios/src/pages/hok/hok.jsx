@@ -9,6 +9,14 @@ import playerBrianImg from "../../assets/Brian.png";
 import coachIxzyImg from "../../assets/tzy.png";
 import coachSatriaImg from "../../assets/satria.jpeg";
 
+/**
+ * ==========================================
+ * HALAMAN UTAMA DIVISI HONOR OF KINGS (HOK)
+ * ==========================================
+ * Fungsi utama untuk menampilkan profil tim Honor of Kings Hilling Strike,
+ * menyajikan ringkasan statistik divisi, formasi pemain berdasarkan lane,
+ * profil pelatih & asisten, filosofi strategi, prestasi tim, dan jadwal match.
+ */
 export default function Hok() {
   const division = divisions.hok;
   const accentColor = division.accent;
@@ -28,7 +36,11 @@ export default function Hok() {
 
   return (
     <section className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Hero Section */}
+      {/* ==========================================
+          1. HERO SECTION & STATISTIK RINGKASAN
+          Menampilkan banner game Honor of Kings dan ringkasan metrik
+          seperti total roster, jumlah turnamen, dan pencapaian juara.
+         ========================================== */}
       <section
         className="relative overflow-hidden px-6 pt-[85vh] pb-12 lg:px-20 min-h-[115vh] flex flex-col justify-end items-center bg-cover bg-center text-center"
         style={{ backgroundImage: `url(${hokBanner})` }}
@@ -43,6 +55,7 @@ export default function Hok() {
             <div className="inline-flex items-center justify-center gap-3 rounded-full border border-[#ffd70055] bg-[#ffffff11] px-4 py-2 text-sm uppercase tracking-[0.2em] text-[#ffd700]">
               HONOR OF KINGS
             </div>
+            {/* Menampilkan ringkasan statistik (total match, win rate, turnamen) di bawah banner HOK */}
             <div className="grid gap-4 sm:grid-cols-3 w-full max-w-3xl">
               {division.stats.map((item) => (
                 <div key={item.label} className="rounded-[1.5rem] border border-[#ffffff19] bg-[#08101f]/80 backdrop-blur-md p-6">
@@ -69,7 +82,11 @@ export default function Hok() {
         </div>
       </section>
       <div className="container mx-auto px-6 pb-20 space-y-10">
-        {/* Formasi Pemain - Full Width Section */}
+        {/* ==========================================
+            2. FORMASI PEMAIN UTAMA (MAIN ROSTER)
+            Menampilkan kartu formasi pemain inti berdasarkan layout lane
+            (Clash, Jungle, Mid, Farm, Roam) beserta statistik Kills & Rating.
+           ========================================== */}
         <section id="formation" className="rounded-[2rem] border border-[#ffffff14] bg-[#08101b] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.18)]">
           <h2 className="text-4xl font-bold mb-8 uppercase" style={{ color: accentColor }}>
             Formasi Pemain
@@ -108,6 +125,11 @@ export default function Hok() {
         {/* Content split in HOK (Pelatih & Strategi on left, Prestasi & Jadwal on right) */}
         <section className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="space-y-10">
+            {/* ==========================================
+                3. STAF PELATIH & FILOSOFI (COACH SECTION)
+                Menampilkan profil pelatih kepala dan asisten pelatih,
+                termasuk nama, spesialisasi, dan pengalaman mereka.
+               ========================================== */}
             <section className="rounded-[2rem] border border-[#ffffff14] bg-[#08101b] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.18)]">
               <h2 className="text-4xl font-bold mb-8 uppercase" style={{ color: accentColor }}>
                 Pelatih & Filosofi
@@ -131,6 +153,11 @@ export default function Hok() {
               </div>
             </section>
 
+            {/* ==========================================
+                4. STRATEGI UTAMA PERMAINAN (TACTICAL STRATEGY)
+                Menjelaskan fokus taktik tim dalam game, seperti
+                kontrol objektif (turtle/lord) dan penentuan draft hero.
+               ========================================== */}
             <section className="rounded-[2rem] border border-[#ffffff14] bg-[#08101b] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.18)]">
               <h2 className="text-4xl font-bold mb-8 uppercase" style={{ color: accentColor }}>
                 Strategi Utama
@@ -153,6 +180,11 @@ export default function Hok() {
           </div>
 
           <aside className="space-y-8">
+            {/* ==========================================
+                5. PRESTASI & PENCAPAIAN TIM (TEAM ACHIEVEMENTS)
+                Menampilkan jumlah kemenangan match dan persentase win rate
+                tim HOK Hilling Strike secara visual.
+               ========================================== */}
             <section className="rounded-[2rem] border border-[#ffffff14] bg-[#08101b] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.18)]">
               <h2 className="text-3xl font-bold mb-6 uppercase" style={{ color: accentColor }}>
                 Prestasi Tim
@@ -171,6 +203,11 @@ export default function Hok() {
               </div>
             </section>
 
+            {/* ==========================================
+                6. JADWAL LAGA TANDING (UPCOMING MATCHES)
+                Menampilkan daftar jadwal tanding tim HOK di turnamen mendatang
+                beserta detail tanggal, waktu, dan nama tim lawan.
+               ========================================== */}
             <section className="rounded-[2rem] border border-[#ffffff14] bg-[#08101b] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.18)]">
               <h2 className="text-3xl font-bold mb-6 uppercase" style={{ color: accentColor }}>
                 Jadwal Pertandingan

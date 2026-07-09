@@ -4,12 +4,19 @@ import { X, ChevronRight, CreditCard, Smartphone, Building2, QrCode, Copy } from
 function MidtransModal({ isOpen, onClose, totalAmount, onSuccess }) {
   const [step, setStep] = useState(1);
   const [selectedMethod, setSelectedMethod] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(24 * 60 * 60); // 24 hours in seconds
+  const [timeLeft, setTimeLeft] = useState(1 * 60 * 60); // 1 hour in seconds
+  const [orderId, setOrderId] = useState('');
+  const [virtualAccountNumber, setVirtualAccountNumber] = useState('');
 
   useEffect(() => {
-    if (!isOpen) {
+    if (isOpen) {
       setStep(1);
       setSelectedMethod(null);
+      setTimeLeft(1 * 60 * 60); // Reset timer ke 1 jam setiap kali modal dibuka
+      // Generate Order ID sekali saja saat modal dibuka
+      setOrderId(`ORDER-${Math.floor(10000 + Math.random() * 90000)}`);
+      // Generate Virtual Account Number sekali saja saat modal dibuka
+      setVirtualAccountNumber(`8077 ${Math.floor(10000000 + Math.random() * 90000000)}`);
     }
   }, [isOpen]);
 
@@ -57,7 +64,7 @@ function MidtransModal({ isOpen, onClose, totalAmount, onSuccess }) {
         <div className="bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
           <div>
             <h6 className="m-0 fw-bold" style={{ color: '#001A40' }}>HS STORE</h6>
-            <span className="small text-muted">ID: ORDER-{Math.floor(Math.random() * 100000)}</span>
+            <span className="small text-muted">ID: {orderId}</span>
           </div>
           <button className="btn btn-sm btn-light p-1 rounded-circle d-flex" onClick={onClose}><X size={20} /></button>
         </div>
@@ -104,7 +111,7 @@ function MidtransModal({ isOpen, onClose, totalAmount, onSuccess }) {
                   <span className="text-muted small d-block mb-2">Nomor Virtual Account</span>
                   <div className="d-flex justify-content-between align-items-center p-3 bg-light rounded border">
                     <h5 className="m-0 fw-bold text-dark" style={{ letterSpacing: '2px' }}>
-                      8077 {Math.floor(10000000 + Math.random() * 90000000)}
+                      {virtualAccountNumber}
                     </h5>
                     <button className="btn btn-sm text-primary p-0 d-flex align-items-center gap-1 border-0 bg-transparent">
                       <Copy size={16} /> <span className="small">Salin</span>

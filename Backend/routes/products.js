@@ -29,7 +29,8 @@ router.get('/', async (req, res) => {
         priceStr: `Rp ${p.harga.toLocaleString('id-ID')}`,
         image: p.gambar, // Pastikan link gambar sudah ada di database Supabase
         category: categoryName,
-        isNew: true // Atribut isNew bisa Anda ubah logikanya nanti sesuai database
+        isNew: true, // Atribut isNew bisa Anda ubah logikanya nanti sesuai database
+        stok: p.stok
       };
     });
 
