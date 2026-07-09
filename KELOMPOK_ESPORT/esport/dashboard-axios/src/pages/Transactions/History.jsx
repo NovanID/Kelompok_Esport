@@ -6,7 +6,6 @@ import { ArrowLeft, CheckCircle2, XCircle, Clock } from 'lucide-react';
 function History() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [deleting, setDeleting] = useState(null);
   const navigate = useNavigate();
 
   /*1. FUNGSI MENGAMBIL RIWAYAT TRANSAKSI (fetchHistory)
