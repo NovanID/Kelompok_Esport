@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Package, ArrowLeft, Trash2, CheckCircle2, XCircle, Clock, ShieldAlert, CreditCard } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, XCircle, Clock } from 'lucide-react';
 
 function History() {
   const [history, setHistory] = useState([]);
@@ -35,29 +35,6 @@ function History() {
     fetchHistory();
   }, [navigate]);
 
-  /*2. FUNGSI PEMBATALAN PESANAN (handleCancelOrder)
-   * Menanyakan konfirmasi pembatalan kepada user, lalu menghubungi backend API untuk membatalkan pesanan.
-   */
-  const handleCancelOrder = async (idPesanan) => {
-    const token = localStorage.getItem('token');
-    if (!token) return;
-
-    if (!window.confirm("Apakah Anda yakin ingin membatalkan pesanan ini?")) {
-      return;
-    }
-
-    try {
-      const response = await axios.post(`http://localhost:5000/api/transactions/cancel/${idPesanan}`, {}, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      alert(response.data.message || 'Pesanan berhasil dibatalkan');
-      fetchHistory();
-    } catch (error) {
-      console.error('Gagal membatalkan pesanan:', error);
-      alert(error.response?.data?.error || 'Gagal membatalkan pesanan');
-    }
-  };
-
   return (
     <section className="pb-5 text-white position-relative" style={{ backgroundColor: '#050505', minHeight: '100vh', paddingTop: '5.5rem' }}>
       {/* Background radial glow */}
@@ -73,6 +50,7 @@ function History() {
             <h1 className="fw-black m-0 tracking-wider" style={{ letterSpacing: '2px', fontSize: '2rem' }}>ORDER HISTORY</h1>
             <p className="text-secondary small m-0 tracking-widest text-uppercase">RIWAYAT TRANSAKSI ANDA</p>
           </div>
+
         </div>
 
         {loading ? (
@@ -107,20 +85,6 @@ function History() {
                     <div>
                       <span className="text-danger small fw-black d-block tracking-wider">ORDER ID: #{order.id_pesanan}</span>
                       <span className="text-secondary small">{new Date(order.tanggal_pesanan).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
-                    </div>
-                    
-                    <div className="d-flex align-items-center gap-3">
-                      <div className="text-end">
-                        {paymentMethod && paymentMethod !== 'Unknown' && (
-                          <span className="d-block text-secondary small mb-1 fw-bold tracking-widest text-uppercase" style={{ fontSize: '0.75rem' }}>{paymentMethod}</span>
-                        )}
-                        <span className={`badge rounded-0 px-3 py-2 fw-bold tracking-wider ${
-                          paymentStatus === 'PAID' ? 'bg-success' : 
-                          isCancelled ? 'bg-secondary text-dark' : 'bg-danger'
-                        }`} style={{ fontSize: '0.75rem' }}>
-                          {paymentStatus === 'PAID' ? 'LUNAS' : isCancelled ? 'BATAL' : paymentStatus}
-                        </span>
-                      </div>
                     </div>
                   </div>
 
@@ -211,11 +175,11 @@ function History() {
                       )}
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
+                );
+              })}
+            </div>
+          )}
+        </div>
       </div>
 
       <style>{`
