@@ -51,6 +51,7 @@ function History() {
             <h1 className="fw-black m-0 tracking-wider" style={{ letterSpacing: '2px', fontSize: '2rem' }}>ORDER HISTORY</h1>
             <p className="text-secondary small m-0 tracking-widest text-uppercase">RIWAYAT TRANSAKSI ANDA</p>
           </div>
+
         </div>
 
         {loading ? (
@@ -175,11 +176,11 @@ function History() {
                       )}
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
+                );
+              })}
+            </div>
+          )}
+        </div>
       </div>
 
       <style>{`
